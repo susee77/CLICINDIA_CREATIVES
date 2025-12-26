@@ -1,38 +1,36 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import {
+  type DesignIdea,
+  type InsertDesignIdea,
+  type Order,
+  type InsertOrder,
+} from "@shared/schema";
+import { designIdeas, orders } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  // Design Ideas
+  getDesignIdeas(): Promise<DesignIdea[]>;
+  createDesignIdea(idea: InsertDesignIdea & { generatedImageUrl?: string }): Promise<DesignIdea>;
+  
+  // Orders
+  createOrder(order: InsertOrder): Promise<Order>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async getDesignIdeas(): Promise<DesignIdea[]> {
+    return await db.select().from(designIdeas);
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async createDesignIdea(idea: InsertDesignIdea & { generatedImageUrl?: string }): Promise<DesignIdea> {
+    const [newIdea] = await db.insert(designIdeas).values(idea).returning();
+    return newIdea;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async createOrder(order: InsertOrder): Promise<Order> {
+    const [newOrder] = await db.insert(orders).values(order).returning();
+    return newOrder;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
