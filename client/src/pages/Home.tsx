@@ -66,6 +66,30 @@ const benefits = [
   { icon: "⚡", text: "Fast delivery (24–72 hrs)" },
 ];
 
+const clientBenefits = [
+  "High-quality, professional design",
+  "Brand-aligned colors, fonts & layout",
+  "2 free revisions (extra revisions available)",
+  "Print-ready & digital formats (PDF, JPG, PNG)",
+  "Fast delivery (24–72 hrs)",
+  "Ad-friendly creatives (approved size & ratio)",
+  "Clear CTA placement (Call, WhatsApp, Enquiry, Buy Now)",
+  "Copyright-safe fonts & stock elements",
+  "Consistent branding across all creatives",
+  "Direct WhatsApp & phone support",
+  "Secure file delivery & backup support",
+];
+
+// Generate random positions for scattered layout
+const getRandomPosition = (index: number) => {
+  const seed = index * 137.5;
+  return {
+    x: ((seed * 12.9898) % 100) - 25,
+    y: ((seed * 78.233) % 80) - 20,
+    rotation: ((seed * 23.14) % 30) - 15,
+  };
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-background overflow-hidden">
@@ -292,6 +316,79 @@ export default function Home() {
               </Button>
             </a>
           </motion.div>
+        </div>
+      </section>
+
+      {/* What Clients Get Section - Scattered Boxes */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-4">
+              What Clients Get
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Everything you need for stunning designs and seamless experience
+            </p>
+          </motion.div>
+
+          {/* Scattered Floating Boxes */}
+          <div className="relative h-[600px] md:h-[800px]">
+            {clientBenefits.map((benefit, idx) => {
+              const pos = getRandomPosition(idx);
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.05 }}
+                  animate={{
+                    y: [0, -15, 0],
+                    rotate: [pos.rotation, pos.rotation + 2, pos.rotation],
+                  }}
+                  whileHover={{ scale: 1.1, y: -20 }}
+                  style={{
+                    left: `${25 + pos.x}%`,
+                    top: `${30 + pos.y}%`,
+                  }}
+                  className="absolute w-64 md:w-72"
+                >
+                  <div className="transition-all duration-300">
+                    <motion.div
+                      className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-full px-6 py-8 text-center backdrop-blur-sm hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all"
+                      animate={{
+                        boxShadow: [
+                          "0 0 20px rgba(168, 85, 247, 0.2)",
+                          "0 0 40px rgba(168, 85, 247, 0.4)",
+                          "0 0 20px rgba(168, 85, 247, 0.2)",
+                        ],
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, delay: idx * 0.1 }}
+                    >
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.1, 1],
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, delay: idx * 0.08 }}
+                        className="text-3xl mb-3"
+                      >
+                        ✓
+                      </motion.div>
+                      <p className="text-sm md:text-base font-semibold text-foreground leading-snug">
+                        {benefit}
+                      </p>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
