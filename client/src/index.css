@@ -5,28 +5,28 @@
 @tailwind utilities;
 
 :root {
+  /* Bold, Colorful Palette */
   --font-display: 'Outfit', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Modern Digital Marketing Palette */
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
 
-  /* Purple gradient matching logo */
-  --primary: 270 85% 55%;
+  /* Vibrant Purple/Pink/Blue Gradients */
+  --primary: 262 83% 58%;
   --primary-foreground: 210 40% 98%;
   
-  --secondary: 190 90% 50%;
+  --secondary: 190 90% 50%; /* Cyan pop */
   --secondary-foreground: 222 47% 11%;
   
-  --accent: 300 80% 60%;
+  --accent: 320 80% 60%; /* Pink accent */
   --accent-foreground: 210 40% 98%;
 
   --muted: 240 3.7% 15.9%;
   --muted-foreground: 240 5% 64.9%;
 
-  --card: 240 10% 8.9%;
+  --card: 240 10% 3.9%;
   --card-foreground: 0 0% 98%;
   
   --popover: 240 10% 3.9%;
@@ -35,7 +35,7 @@
   --border: 240 3.7% 15.9%;
   --input: 240 3.7% 15.9%;
   
-  --ring: 270 85% 55%;
+  --ring: 262 83% 58%;
   
   --radius: 0.75rem;
 }
@@ -53,6 +53,7 @@
   }
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -69,10 +70,20 @@
   @apply bg-muted-foreground;
 }
 
+/* Neon Glow Utilities */
+.text-glow {
+  text-shadow: 0 0 20px rgba(var(--primary), 0.5);
+}
+
+.box-glow {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+}
+
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary;
 }
 
+/* Custom Cursor Base */
 .custom-cursor {
   position: fixed;
   top: 0;
@@ -87,51 +98,7 @@
   transition: transform 0.1s ease;
 }
 
+/* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
-}
-
-/* Animated gradient background */
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animated-gradient-bg {
-  background: linear-gradient(
-    -45deg,
-    rgba(148, 51, 234, 0.1),
-    rgba(168, 85, 247, 0.05),
-    rgba(139, 92, 246, 0.1),
-    rgba(99, 102, 241, 0.05)
-  );
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
-}
-
-/* Floating animation */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Glow effect */
-.glow-effect {
-  box-shadow: 0 0 40px rgba(168, 85, 247, 0.3);
-}
-
-.glow-effect:hover {
-  box-shadow: 0 0 60px rgba(168, 85, 247, 0.5);
 }
