@@ -1,343 +1,309 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { 
-  Palette, FileText, Megaphone, 
-  CreditCard, BookOpen, PenTool,
-  Download, Sparkles, ArrowRight
-} from "lucide-react";
-import { PricingCard } from "@/components/PricingCard";
-import { useDesignIdeas, useCreateDesignIdea, useGenerateImage } from "@/hooks/use-design-ideas";
-import { useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
+import { Mail, Phone, MapPin, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-// Animation Variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
-};
+const serviceCategories = [
+  {
+    category: "📌 Poster Design",
+    services: [
+      { name: "Single Poster", price: "₹499" },
+      { name: "5 Posters", price: "₹2,200" },
+      { name: "10 Posters", price: "₹4,000" },
+      { name: "Festival / Offer Poster", price: "₹599" },
+    ],
+  },
+  {
+    category: "📄 Pamphlet / Flyer Design",
+    services: [
+      { name: "Single-side Pamphlet", price: "₹1,500" },
+      { name: "Double-side Pamphlet", price: "₹2,500" },
+      { name: "With Content Writing", price: "+₹1,000" },
+    ],
+  },
+  {
+    category: "📢 Meta Ads Poster",
+    services: [
+      { name: "Single Ad Creative", price: "₹799" },
+      { name: "3 Ad Creatives", price: "₹2,000" },
+      { name: "5 Ad Creatives", price: "₹3,000" },
+      { name: "With Ad Copy (Text)", price: "+₹1,000" },
+    ],
+  },
+  {
+    category: "💼 Business Card Design",
+    services: [
+      { name: "Single-side", price: "₹999" },
+      { name: "Double-side", price: "₹1,499" },
+      { name: "QR Code Included", price: "Free" },
+      { name: "Print-ready File (CMYK, PDF)", price: "Included" },
+    ],
+  },
+  {
+    category: "📘 Catalogue / Brochure Design",
+    services: [
+      { name: "4 Pages", price: "₹4,000" },
+      { name: "8 Pages", price: "₹7,000" },
+      { name: "12 Pages", price: "₹10,000" },
+      { name: "Additional Page", price: "₹800 / page" },
+    ],
+  },
+  {
+    category: "🧾 Other Design Works",
+    services: [
+      { name: "Logo Refresh / Basic Logo", price: "₹2,500" },
+      { name: "Letterhead Design", price: "₹999" },
+      { name: "Invoice / Bill Format", price: "₹1,200" },
+      { name: "Social Media Profile Banner", price: "₹799" },
+    ],
+  },
+];
 
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1,
-    transition: { type: "spring", stiffness: 100 }
-  }
-};
+const benefits = [
+  { icon: "✨", text: "High-quality design" },
+  { icon: "🎨", text: "Brand colors & fonts" },
+  { icon: "🔄", text: "2 revisions included" },
+  { icon: "📂", text: "Print & digital files" },
+  { icon: "⚡", text: "Fast delivery (24–72 hrs)" },
+];
 
 export default function Home() {
-  const { data: designIdeas } = useDesignIdeas();
-  const createIdea = useCreateDesignIdea();
-  const generateImage = useGenerateImage();
-  const { toast } = useToast();
-
-  const [ideaPrompt, setIdeaPrompt] = useState("");
-  const [ideaTitle, setIdeaTitle] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedUrl, setGeneratedUrl] = useState<string | null>(null);
-
-  const handleGenerate = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!ideaPrompt) return;
-    
-    setIsGenerating(true);
-    try {
-      const result = await generateImage.mutateAsync(ideaPrompt);
-      setGeneratedUrl(result.imageUrl);
-      toast({ title: "Image Generated!", description: "Now you can save this design idea." });
-    } catch (error) {
-      toast({ title: "Generation Failed", description: "Please try again.", variant: "destructive" });
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  const handleSaveIdea = () => {
-    if (!ideaTitle || !generatedUrl) return;
-    
-    createIdea.mutate({
-      title: ideaTitle,
-      description: ideaPrompt,
-      category: "Generated",
-      generatedImageUrl: generatedUrl
-    }, {
-      onSuccess: () => {
-        toast({ title: "Saved!", description: "Your design idea has been saved to the gallery." });
-        setIdeaPrompt("");
-        setIdeaTitle("");
-        setGeneratedUrl(null);
-      }
-    });
-  };
-
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      {/* --- HERO SECTION --- */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8">
-        {/* Background Gradients */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-          <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/20 rounded-full blur-[120px]" />
-          <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-accent/20 rounded-full blur-[100px]" />
+    <div className="min-h-screen bg-background overflow-hidden">
+      {/* Animated background */}
+      <div className="fixed inset-0 animated-gradient-bg pointer-events-none" />
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left: Logo & Intro */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center md:items-start space-y-8"
+          >
+            <motion.img
+              src="/logo.jpg"
+              alt="CLIC INDIA Creatives Logo"
+              className="w-40 h-40 md:w-56 md:h-56 rounded-full glow-effect animate-float"
+              whileHover={{ scale: 1.05 }}
+            />
+            <div className="text-center md:text-left space-y-4">
+              <h1 className="text-5xl md:text-6xl font-black gradient-text leading-tight">
+                CLIC INDIA
+                <br />
+                Creatives
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-md">
+                Your partner in stunning digital designs. We create visuals that captivate, 
+                engage, and convert.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right: Features Grid */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            {benefits.map((benefit, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.05 }}
+                className="bg-card/50 backdrop-blur border border-border rounded-xl p-6 hover:border-accent transition-colors"
+              >
+                <div className="text-3xl mb-2">{benefit.icon}</div>
+                <p className="text-sm font-medium text-foreground">{benefit.text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center max-w-5xl mx-auto z-10"
-        >
-          <motion.div variants={itemVariants} className="inline-block mb-6">
-            <span className="px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-mono tracking-wider text-accent-foreground">
-              PREMIUM DESIGN SERVICES
-            </span>
-          </motion.div>
-          
-          <motion.h1 variants={itemVariants} className="text-6xl md:text-8xl font-black font-display tracking-tighter mb-6 leading-none">
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">CLIC INDIA</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary animate-gradient-x text-glow">
-              CREATIVES
-            </span>
-          </motion.h1>
-
-          <motion.p variants={itemVariants} className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 font-light">
-            Elevate your brand with stunning visuals. From posters to social media ads, we craft designs that captivate and convert.
-          </motion.p>
-
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="#services" className="px-8 py-4 rounded-full bg-white text-black font-bold text-lg hover:scale-105 active:scale-95 transition-transform shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
-              View Services
-            </a>
-            <Dialog>
-              <DialogTrigger asChild>
-                <button className="px-8 py-4 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white font-bold text-lg hover:bg-white/10 transition-colors flex items-center gap-2 group">
-                  <Sparkles className="w-5 h-5 text-accent group-hover:rotate-12 transition-transform" />
-                  Try AI Generator
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-xl bg-card border-border">
-                <div className="space-y-6 py-4">
-                  <h2 className="text-3xl font-bold font-display gradient-text">AI Design Studio</h2>
-                  <p className="text-muted-foreground">Describe your idea and let our AI visualize it instantly.</p>
-                  
-                  {!generatedUrl ? (
-                    <form onSubmit={handleGenerate} className="space-y-4">
-                      <textarea 
-                        value={ideaPrompt}
-                        onChange={(e) => setIdeaPrompt(e.target.value)}
-                        placeholder="A futuristic poster for a tech conference with neon lights..."
-                        className="w-full h-32 p-4 rounded-xl bg-muted/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none"
-                      />
-                      <button 
-                        type="submit" 
-                        disabled={isGenerating || !ideaPrompt}
-                        className="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-accent font-bold text-white shadow-lg hover:opacity-90 transition-opacity disabled:opacity-50"
-                      >
-                        {isGenerating ? "Dreaming..." : "Generate Concept"}
-                      </button>
-                    </form>
-                  ) : (
-                    <div className="space-y-4">
-                      <div className="aspect-video w-full rounded-xl overflow-hidden border border-border relative group">
-                        <img src={generatedUrl} alt="Generated" className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                           <button onClick={() => setGeneratedUrl(null)} className="text-white underline">Try Again</button>
-                        </div>
-                      </div>
-                      <input 
-                        value={ideaTitle}
-                        onChange={(e) => setIdeaTitle(e.target.value)}
-                        placeholder="Give this design a title..."
-                        className="w-full p-4 rounded-xl bg-muted/50 border border-border focus:border-primary outline-none"
-                      />
-                      <button 
-                        onClick={handleSaveIdea}
-                        disabled={!ideaTitle}
-                        className="w-full py-4 rounded-xl bg-green-500 font-bold text-white shadow-lg hover:bg-green-600 transition-colors disabled:opacity-50"
-                      >
-                        Save to Gallery
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </DialogContent>
-            </Dialog>
-          </motion.div>
-        </motion.div>
-
-        {/* Floating 3D Elements (Decorative) */}
-        <motion.div 
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }} 
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 right-[10%] w-32 h-32 bg-gradient-to-br from-primary to-purple-800 rounded-3xl opacity-20 blur-sm rotate-12 -z-10 hidden lg:block"
-        />
-        <motion.div 
-          animate={{ y: [0, 30, 0], rotate: [0, -10, 0] }} 
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 left-[10%] w-40 h-40 bg-gradient-to-br from-secondary to-blue-800 rounded-full opacity-20 blur-sm -z-10 hidden lg:block"
-        />
       </section>
 
-      {/* --- PRICING SECTION --- */}
-      <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 relative bg-black/40 backdrop-blur-3xl">
+      {/* Services Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">Our Services</h2>
-            <p className="text-xl text-muted-foreground">Professional design solutions tailored to your needs</p>
+            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-4">
+              Our Design Services
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              From posters to brochures, we deliver professional designs tailored to your brand
+            </p>
           </motion.div>
 
+          {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <PricingCard 
-              title="Poster Design" 
-              icon={<Palette className="w-6 h-6" />}
-              color="bg-purple-600"
-              items={[
-                { name: "Single Poster", price: 499 },
-                { name: "Pack of 5", price: 2200 },
-                { name: "Pack of 10", price: 4000 },
-                { name: "Festival/Offer", price: 599 },
-              ]}
-            />
-            <PricingCard 
-              title="Pamphlet / Flyer" 
-              icon={<FileText className="w-6 h-6" />}
-              color="bg-pink-600"
-              items={[
-                { name: "Single Side", price: 1500 },
-                { name: "Double Side", price: 2500 },
-                { name: "With Content Writing", price: 2500 }, // Base + 1000
-              ]}
-            />
-            <PricingCard 
-              title="Meta Ads" 
-              icon={<Megaphone className="w-6 h-6" />}
-              color="bg-blue-600"
-              items={[
-                { name: "Single Creative", price: 799 },
-                { name: "Pack of 3", price: 2000 },
-                { name: "Pack of 5", price: 3000 },
-                { name: "With Ad Copy", price: 1799 }, // Base + 1000
-              ]}
-            />
-            <PricingCard 
-              title="Business Cards" 
-              icon={<CreditCard className="w-6 h-6" />}
-              color="bg-emerald-600"
-              items={[
-                { name: "Single Side", price: 999 },
-                { name: "Double Side", price: 1499 },
-                { name: "QR Code Only", price: 0 },
-              ]}
-            />
-            <PricingCard 
-              title="Brochures" 
-              icon={<BookOpen className="w-6 h-6" />}
-              color="bg-orange-600"
-              items={[
-                { name: "4 Pages", price: 4000 },
-                { name: "8 Pages", price: 7000 },
-                { name: "12 Pages", price: 10000 },
-                { name: "Extra Page", price: 800 },
-              ]}
-            />
-            <PricingCard 
-              title="Branding" 
-              icon={<PenTool className="w-6 h-6" />}
-              color="bg-indigo-600"
-              items={[
-                { name: "Logo Design", price: 2500 },
-                { name: "Letterhead", price: 999 },
-                { name: "Invoice Format", price: 1200 },
-                { name: "Social Banner", price: 799 },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* --- DESIGN GALLERY (CRUD) --- */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <h2 className="text-4xl font-bold font-display mb-2">Design Gallery</h2>
-              <p className="text-muted-foreground">Community creations and inspiration</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-             {designIdeas?.map((idea) => (
-               <motion.div 
-                 key={idea.id}
-                 initial={{ opacity: 0, scale: 0.9 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 className="group relative aspect-square rounded-2xl overflow-hidden bg-muted"
-               >
-                 {idea.generatedImageUrl ? (
-                   <img src={idea.generatedImageUrl} alt={idea.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                 ) : (
-                   <div className="w-full h-full flex items-center justify-center bg-muted text-muted-foreground">
-                     No Image
-                   </div>
-                 )}
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
-                   <h4 className="text-white font-bold text-lg">{idea.title}</h4>
-                   <p className="text-white/70 text-sm line-clamp-2">{idea.description}</p>
-                 </div>
-               </motion.div>
-             ))}
-             
-             {/* Add New Placeholder Card */}
-             <Dialog>
-              <DialogTrigger asChild>
-                <motion.button 
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="aspect-square rounded-2xl border-2 border-dashed border-border hover:border-primary/50 hover:bg-primary/5 flex flex-col items-center justify-center gap-4 transition-all group"
-                >
-                  <div className="w-16 h-16 rounded-full bg-muted group-hover:bg-primary/20 flex items-center justify-center transition-colors">
-                    <Sparkles className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </div>
-                  <span className="font-bold text-muted-foreground group-hover:text-primary transition-colors">Create Your Own</span>
-                </motion.button>
-              </DialogTrigger>
-              <DialogContent className="bg-card border-border">
-                {/* Reusing the generator UI logic would be ideal here, simplified for demo */}
-                <div className="text-center py-8">
-                  <Sparkles className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Use the AI Generator</h3>
-                  <p className="text-muted-foreground mb-6">Scroll up to the hero section to use our AI tool!</p>
-                  <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="px-6 py-2 bg-primary rounded-lg font-bold">Go to Top</button>
+            {serviceCategories.map((category, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-card/50 backdrop-blur border border-border rounded-2xl p-8 hover:border-accent transition-all glow-effect"
+              >
+                <h3 className="text-2xl font-bold text-foreground mb-6">
+                  {category.category}
+                </h3>
+                <div className="space-y-3">
+                  {category.services.map((service, sidx) => (
+                    <div
+                      key={sidx}
+                      className="flex justify-between items-center pb-3 border-b border-border/50 last:border-0"
+                    >
+                      <span className="text-muted-foreground">{service.name}</span>
+                      <span className="font-bold text-accent">{service.price}</span>
+                    </div>
+                  ))}
                 </div>
-              </DialogContent>
-             </Dialog>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* --- FOOTER / DOWNLOAD --- */}
-      <footer className="border-t border-border/50 bg-black/20 backdrop-blur-lg py-12 px-4 text-center">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <h2 className="text-3xl font-bold font-display">Ready to get started?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => alert("Downloading Services PDF...")}
-              className="px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md flex items-center justify-center gap-3 transition-all group"
+      {/* Why Choose Us Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-primary/20 via-accent/10 to-secondary/20 rounded-3xl border border-primary/30 p-12 md:p-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-8 text-center">
+              Why Choose Us?
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+              {benefits.map((benefit, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ scale: 1.1 }}
+                  className="text-center space-y-3"
+                >
+                  <div className="text-5xl">{benefit.icon}</div>
+                  <p className="text-sm font-semibold text-foreground leading-tight">
+                    {benefit.text}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-4">
+              Get in Touch
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Let's talk about your goals, challenges, and how we can grow your business online — 
+              over a quick chat or coffee.
+            </p>
+          </motion.div>
+
+          {/* Contact Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {/* Address */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="bg-card/50 backdrop-blur border border-border rounded-2xl p-8 glow-effect"
             >
-              <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-              <span>Download Price List (PDF)</span>
-            </button>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-3 bg-primary/20 rounded-lg">
+                  <MapPin className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Address</h3>
+              </div>
+              <p className="text-muted-foreground">
+                Thinnappa Nagar, Gandhigramam,
+                <br />
+                Karur, Tamil Nadu 639004
+              </p>
+            </motion.div>
+
+            {/* Email */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="bg-card/50 backdrop-blur border border-border rounded-2xl p-8 glow-effect"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-3 bg-accent/20 rounded-lg">
+                  <Mail className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Email</h3>
+              </div>
+              <div className="space-y-2 text-muted-foreground">
+                <p>hello@clicindia.in</p>
+                <p>info.clicindia@gmail.com</p>
+              </div>
+            </motion.div>
+
+            {/* Phone */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="bg-card/50 backdrop-blur border border-border rounded-2xl p-8 glow-effect"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-3 bg-secondary/20 rounded-lg">
+                  <Phone className="w-6 h-6 text-secondary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Phone</h3>
+              </div>
+              <p className="text-muted-foreground">
+                +91 - 9962135077
+              </p>
+            </motion.div>
           </div>
-          <p className="text-muted-foreground text-sm">© 2024 CLIC INDIA Creatives. All rights reserved.</p>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <a href="mailto:hello@clicindia.in">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-accent/50 text-foreground px-8"
+              >
+                <Zap className="w-4 h-4 mr-2" />
+                Get Started Today
+              </Button>
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative border-t border-border bg-card/30 backdrop-blur py-8 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          <p className="text-muted-foreground mb-2">
+            © 2025 CLIC INDIA Creatives. All rights reserved.
+          </p>
+          <p className="text-sm text-muted-foreground/70">
+            Crafting beautiful designs for your digital presence
+          </p>
         </div>
       </footer>
     </div>

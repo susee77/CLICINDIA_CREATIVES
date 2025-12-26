@@ -1,36 +1,14 @@
-import {
-  type DesignIdea,
-  type InsertDesignIdea,
-  type Order,
-  type InsertOrder,
-} from "@shared/schema";
-import { designIdeas, orders } from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { type Page, type InsertPage } from "@shared/schema";
 
 export interface IStorage {
-  // Design Ideas
-  getDesignIdeas(): Promise<DesignIdea[]>;
-  createDesignIdea(idea: InsertDesignIdea & { generatedImageUrl?: string }): Promise<DesignIdea>;
-  
-  // Orders
-  createOrder(order: InsertOrder): Promise<Order>;
+  // Minimal storage for static site
+  getStatus(): Promise<string>;
 }
 
-export class DatabaseStorage implements IStorage {
-  async getDesignIdeas(): Promise<DesignIdea[]> {
-    return await db.select().from(designIdeas);
-  }
-
-  async createDesignIdea(idea: InsertDesignIdea & { generatedImageUrl?: string }): Promise<DesignIdea> {
-    const [newIdea] = await db.insert(designIdeas).values(idea).returning();
-    return newIdea;
-  }
-
-  async createOrder(order: InsertOrder): Promise<Order> {
-    const [newOrder] = await db.insert(orders).values(order).returning();
-    return newOrder;
+export class MemStorage implements IStorage {
+  async getStatus(): Promise<string> {
+    return "ok";
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();
