@@ -98,7 +98,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto w-full flex justify-center">
           {/* Left: Logo & Intro */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -125,24 +125,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Right: Features Grid */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4"
-          >
-            {benefits.map((benefit, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.05 }}
-                className="bg-card/50 backdrop-blur border border-border rounded-xl p-6 hover:border-accent transition-colors"
-              >
-                <div className="text-3xl mb-2">{benefit.icon}</div>
-                <p className="text-sm font-medium text-foreground">{benefit.text}</p>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </section>
 
@@ -348,11 +330,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.05 }}
-                  animate={{
-                    y: [0, -15, 0],
-                    rotate: [pos.rotation, pos.rotation + 2, pos.rotation],
-                  }}
-                  whileHover={{ scale: 1.1, y: -20 }}
+                  whileHover={{ scale: 1.1 }}
                   style={{
                     left: `${25 + pos.x}%`,
                     top: `${30 + pos.y}%`,
@@ -371,15 +349,6 @@ export default function Home() {
                       }}
                       transition={{ duration: 3, repeat: Infinity, delay: idx * 0.1 }}
                     >
-                      <motion.div
-                        animate={{
-                          scale: [1, 1.1, 1],
-                        }}
-                        transition={{ duration: 2, repeat: Infinity, delay: idx * 0.08 }}
-                        className="text-3xl mb-3"
-                      >
-                        ✓
-                      </motion.div>
                       <p className="text-sm md:text-base font-semibold text-foreground leading-snug">
                         {benefit}
                       </p>
