@@ -112,7 +112,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background overflow-hidden" ref={headerRef}>
+    <div className="min-h-screen bg-background overflow-hidden website-border-glow m-4 rounded-3xl" ref={headerRef}>
       {/* Animated background */}
       <div className="fixed inset-0 animated-gradient-bg pointer-events-none" />
 

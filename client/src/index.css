@@ -138,6 +138,24 @@ html {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Instagram-like glow border for entire website */
+@keyframes instagram-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(224, 48, 108, 0.4), 0 0 40px rgba(255, 100, 100, 0.2), inset 0 0 20px rgba(224, 48, 108, 0.1);
+    border-color: rgba(224, 48, 108, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(224, 48, 108, 0.6), 0 0 60px rgba(255, 100, 100, 0.4), inset 0 0 30px rgba(224, 48, 108, 0.15);
+    border-color: rgba(224, 48, 108, 0.8);
+  }
+}
+
+.website-border-glow {
+  border: 2px solid rgba(224, 48, 108, 0.6);
+  animation: instagram-glow 3s ease-in-out infinite;
+  background: linear-gradient(rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.01));
+}
+
 /* Glow effect */
 .glow-effect {
   box-shadow: 0 0 40px rgba(168, 85, 247, 0.3);
