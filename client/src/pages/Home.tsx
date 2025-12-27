@@ -78,6 +78,7 @@ const clientBenefits = [
   "Consistent branding across all creatives",
   "Direct WhatsApp & phone support",
   "Secure file delivery & backup support",
+  "Platform-optimized designs (Instagram, Facebook, Ads, Print)",
 ];
 
 // Generate random positions for scattered layout
@@ -208,8 +209,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+
+      {/* What Clients Get Section - 4x3 Grid */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-4">
+              What Clients Get
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Everything you need for stunning designs and seamless experience
+            </p>
+          </motion.div>
+
+          {/* 4x3 Grid Layout */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {clientBenefits.map((benefit, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-full px-6 py-8 text-center backdrop-blur-sm hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all h-full flex items-center justify-center">
+                  <p className="text-sm font-semibold text-foreground leading-snug">
+                    {benefit}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer - Get in Touch */}
+      <footer className="relative border-t border-border bg-card/30 backdrop-blur py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -298,78 +340,13 @@ export default function Home() {
               </Button>
             </a>
           </motion.div>
-        </div>
-      </section>
 
-      {/* What Clients Get Section - Scattered Boxes */}
-      <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-4">
-              What Clients Get
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              Everything you need for stunning designs and seamless experience
+          {/* Copyright */}
+          <div className="border-t border-border mt-12 pt-8">
+            <p className="text-center text-muted-foreground text-sm">
+              © 2025 CLIC INDIA Creatives. All rights reserved.
             </p>
-          </motion.div>
-
-          {/* Scattered Floating Boxes */}
-          <div className="relative h-[600px] md:h-[800px]">
-            {clientBenefits.map((benefit, idx) => {
-              const pos = getRandomPosition(idx);
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.05 }}
-                  whileHover={{ scale: 1.1 }}
-                  style={{
-                    left: `${25 + pos.x}%`,
-                    top: `${30 + pos.y}%`,
-                  }}
-                  className="absolute w-64 md:w-72"
-                >
-                  <div className="transition-all duration-300">
-                    <motion.div
-                      className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-full px-6 py-8 text-center backdrop-blur-sm hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all"
-                      animate={{
-                        boxShadow: [
-                          "0 0 20px rgba(168, 85, 247, 0.2)",
-                          "0 0 40px rgba(168, 85, 247, 0.4)",
-                          "0 0 20px rgba(168, 85, 247, 0.2)",
-                        ],
-                      }}
-                      transition={{ duration: 3, repeat: Infinity, delay: idx * 0.1 }}
-                    >
-                      <p className="text-sm md:text-base font-semibold text-foreground leading-snug">
-                        {benefit}
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              );
-            })}
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative border-t border-border bg-card/30 backdrop-blur py-8 px-4">
-        <div className="max-w-5xl mx-auto text-center">
-          <p className="text-muted-foreground mb-2">
-            © 2025 CLIC INDIA Creatives. All rights reserved.
-          </p>
-          <p className="text-sm text-muted-foreground/70">
-            Crafting beautiful designs for your digital presence
-          </p>
         </div>
       </footer>
     </div>
