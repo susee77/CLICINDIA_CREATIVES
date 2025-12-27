@@ -214,6 +214,112 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Logo Design Packages Section */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-4">
+              🔹 Logo Design Packages
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Choose the perfect logo package for your brand
+            </p>
+          </motion.div>
+
+          {/* Logo Packages Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Basic Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ y: -8 }}
+              className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
+            >
+              <h3 className="text-2xl font-bold text-foreground mb-2">1️⃣ Basic Logo</h3>
+              <p className="text-2xl font-bold text-accent mb-6">₹2,499</p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>✓ Simple & clean logo</li>
+                <li>✓ Text / icon-based design</li>
+                <li>✓ 1 concept</li>
+                <li>✓ 1 revision</li>
+                <li>✓ JPG + PNG files</li>
+              </ul>
+            </motion.div>
+
+            {/* Standard Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ y: -8 }}
+              className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
+            >
+              <h3 className="text-2xl font-bold text-foreground mb-2">2️⃣ Standard Logo</h3>
+              <p className="text-2xl font-bold text-accent mb-6">₹4,999</p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>✓ Professional logo design</li>
+                <li>✓ 2 concepts</li>
+                <li>✓ Brand color suggestion</li>
+                <li>✓ 2 revisions</li>
+                <li>✓ JPG, PNG, PDF files</li>
+              </ul>
+            </motion.div>
+
+            {/* Premium Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ y: -8 }}
+              className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
+            >
+              <h3 className="text-2xl font-bold text-foreground mb-2">3️⃣ Premium Logo</h3>
+              <p className="text-2xl font-bold text-accent mb-6">₹9,999+</p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>✓ High-quality professional logo</li>
+                <li>✓ 3 unique concepts</li>
+                <li>✓ Brand colors & font selection</li>
+                <li>✓ 3 revisions</li>
+                <li>✓ Source files (AI / SVG)</li>
+                <li>✓ Print & digital ready</li>
+              </ul>
+            </motion.div>
+
+            {/* Brand Pro Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ y: -8 }}
+              className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
+            >
+              <h3 className="text-2xl font-bold text-foreground mb-2">4️⃣ Brand Pro Logo</h3>
+              <p className="text-2xl font-bold text-accent mb-6">₹21,999+</p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>✓ Premium brand-level logo</li>
+                <li>✓ 4–5 custom concepts</li>
+                <li>✓ Deep brand research</li>
+                <li>✓ Unlimited revisions</li>
+                <li>✓ Full source files</li>
+                <li>✓ Brand usage guidelines</li>
+                <li>✓ Social media & print optimization</li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
