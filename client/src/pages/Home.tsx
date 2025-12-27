@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Zap, MessageCircle, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import heroImage from "@assets/generated_images/excited_woman_in_digital_marketing_workspace.png";
 
 const serviceCategories = [
   {
@@ -134,7 +135,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-7xl mx-auto w-full flex justify-center">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left: Logo & Intro */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -161,6 +162,22 @@ export default function Home() {
             </div>
           </motion.div>
 
+          {/* Right: Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative rounded-2xl overflow-hidden glow-effect">
+              <img
+                src={heroImage}
+                alt="Digital Marketing Professional"
+                className="w-full h-auto rounded-2xl object-cover shadow-lg"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 rounded-2xl pointer-events-none" />
+            </div>
+          </motion.div>
         </div>
       </section>
 
