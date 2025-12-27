@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Zap, MessageCircle, PhoneCall } from "lucide-react";
+import { Mail, Phone, MapPin, Zap, MessageCircle, PhoneCall, ArrowUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@assets/generated_images/excited_woman_in_digital_marketing_workspace.png";
 
@@ -96,15 +96,47 @@ const getRandomPosition = (index: number) => {
 
 export default function Home() {
   const servicesRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const scrollToServices = () => {
     servicesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToTop = () => {
+    headerRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToBottom = () => {
+    footerRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
+    <div className="min-h-screen bg-background overflow-hidden" ref={headerRef}>
       {/* Animated background */}
       <div className="fixed inset-0 animated-gradient-bg pointer-events-none" />
+
+      {/* Scroll Navigation Arrows - Top Right */}
+      <motion.button
+        onClick={scrollToTop}
+        className="fixed top-8 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg hover:shadow-xl"
+        data-testid="button-scroll-top"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <ArrowUp className="w-6 h-6 text-white" />
+      </motion.button>
+
+      {/* Scroll Navigation Arrows - Bottom Right */}
+      <motion.button
+        onClick={scrollToBottom}
+        className="fixed bottom-28 right-8 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-accent to-secondary flex items-center justify-center shadow-lg hover:shadow-xl"
+        data-testid="button-scroll-bottom"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <ArrowDown className="w-6 h-6 text-white" />
+      </motion.button>
 
       {/* Floating Contact Buttons with Heartbeat */}
       <div className="fixed bottom-8 right-8 z-40 flex flex-col gap-4">
@@ -420,7 +452,7 @@ export default function Home() {
       </section>
 
       {/* Footer - Get in Touch */}
-      <footer className="relative border-t border-border bg-card/30 backdrop-blur py-20 px-4 sm:px-6 lg:px-8">
+      <footer ref={footerRef} className="relative border-t border-border bg-card/30 backdrop-blur py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
