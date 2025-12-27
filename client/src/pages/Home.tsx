@@ -65,6 +65,7 @@ const benefits = [
   "Strong Local Market Expertise",
   "Complete End-to-End Solutions",
   "Dedicated Support & Fast Delivery",
+  "Trusted by Clients with Proven Results",
 ];
 
 const clientBenefits = [
@@ -101,33 +102,38 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
-      {/* Header with Contact Icons */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 backdrop-blur border-b border-primary/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-end gap-4 h-16">
-          <a
-            href="https://wa.me/919962135077"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 hover:bg-primary/30 rounded-lg transition-all"
-            data-testid="button-whatsapp"
-          >
-            <MessageCircle className="w-6 h-6 text-accent" />
-          </a>
-          <a
-            href="tel:+919962135077"
-            className="p-2 hover:bg-primary/30 rounded-lg transition-all"
-            data-testid="button-call"
-          >
-            <PhoneCall className="w-6 h-6 text-secondary" />
-          </a>
-        </div>
-      </header>
-
       {/* Animated background */}
       <div className="fixed inset-0 animated-gradient-bg pointer-events-none" />
 
+      {/* Floating Contact Buttons with Heartbeat */}
+      <div className="fixed bottom-8 right-8 z-40 flex flex-col gap-4">
+        {/* WhatsApp Button */}
+        <motion.a
+          href="https://wa.me/919962135077"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="heartbeat-button w-14 h-14 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg"
+          data-testid="button-whatsapp"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <MessageCircle className="w-6 h-6 text-white" />
+        </motion.a>
+
+        {/* Call Button */}
+        <motion.a
+          href="tel:+919962135077"
+          className="heartbeat-button w-14 h-14 rounded-full bg-gradient-to-br from-secondary to-primary flex items-center justify-center shadow-lg"
+          data-testid="button-call"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <PhoneCall className="w-6 h-6 text-white" />
+        </motion.a>
+      </div>
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 mt-16">
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-7xl mx-auto w-full flex justify-center">
           {/* Left: Logo & Intro */}
           <motion.div
