@@ -1,10 +1,11 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Zap } from "lucide-react";
+import { Mail, Phone, MapPin, Zap, MessageCircle, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const serviceCategories = [
   {
-    category: "📌 Poster Design",
+    category: "Poster Design",
     services: [
       { name: "Single Poster", price: "₹499" },
       { name: "5 Posters", price: "₹2,200" },
@@ -13,7 +14,7 @@ const serviceCategories = [
     ],
   },
   {
-    category: "📄 Pamphlet / Flyer Design",
+    category: "Pamphlet / Flyer Design",
     services: [
       { name: "Single-side Pamphlet", price: "₹1,500" },
       { name: "Double-side Pamphlet", price: "₹2,500" },
@@ -21,7 +22,7 @@ const serviceCategories = [
     ],
   },
   {
-    category: "📢 Meta Ads Poster",
+    category: "Meta Ads Poster",
     services: [
       { name: "Single Ad Creative", price: "₹799" },
       { name: "3 Ad Creatives", price: "₹2,000" },
@@ -30,7 +31,7 @@ const serviceCategories = [
     ],
   },
   {
-    category: "💼 Business Card Design",
+    category: "Business Card Design",
     services: [
       { name: "Single-side", price: "₹999" },
       { name: "Double-side", price: "₹1,499" },
@@ -39,7 +40,7 @@ const serviceCategories = [
     ],
   },
   {
-    category: "📘 Catalogue / Brochure Design",
+    category: "Catalogue / Brochure Design",
     services: [
       { name: "4 Pages", price: "₹4,000" },
       { name: "8 Pages", price: "₹7,000" },
@@ -48,7 +49,7 @@ const serviceCategories = [
     ],
   },
   {
-    category: "🧾 Other Design Works",
+    category: "Other Design Works",
     services: [
       { name: "Logo Refresh / Basic Logo", price: "₹2,500" },
       { name: "Letterhead Design", price: "₹999" },
@@ -59,11 +60,11 @@ const serviceCategories = [
 ];
 
 const benefits = [
-  { icon: "✨", text: "High-quality design" },
-  { icon: "🎨", text: "Brand colors & fonts" },
-  { icon: "🔄", text: "2 revisions included" },
-  { icon: "📂", text: "Print & digital files" },
-  { icon: "⚡", text: "Fast delivery (24–72 hrs)" },
+  "Results-Focused Digital Marketing",
+  "Affordable & Transparent Pricing",
+  "Strong Local Market Expertise",
+  "Complete End-to-End Solutions",
+  "Dedicated Support & Fast Delivery",
 ];
 
 const clientBenefits = [
@@ -92,13 +93,41 @@ const getRandomPosition = (index: number) => {
 };
 
 export default function Home() {
+  const servicesRef = useRef<HTMLDivElement>(null);
+
+  const scrollToServices = () => {
+    servicesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background overflow-hidden">
+      {/* Header with Contact Icons */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-primary/20 via-accent/20 to-secondary/20 backdrop-blur border-b border-primary/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-end gap-4 h-16">
+          <a
+            href="https://wa.me/919962135077"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 hover:bg-primary/30 rounded-lg transition-all"
+            data-testid="button-whatsapp"
+          >
+            <MessageCircle className="w-6 h-6 text-accent" />
+          </a>
+          <a
+            href="tel:+919962135077"
+            className="p-2 hover:bg-primary/30 rounded-lg transition-all"
+            data-testid="button-call"
+          >
+            <PhoneCall className="w-6 h-6 text-secondary" />
+          </a>
+        </div>
+      </header>
+
       {/* Animated background */}
       <div className="fixed inset-0 animated-gradient-bg pointer-events-none" />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 mt-16">
         <div className="max-w-7xl mx-auto w-full flex justify-center">
           {/* Left: Logo & Intro */}
           <motion.div
@@ -130,7 +159,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section ref={servicesRef} className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -186,26 +215,37 @@ export default function Home() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-primary/20 via-accent/10 to-secondary/20 rounded-3xl border border-primary/30 p-12 md:p-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-8 text-center">
+            <h2 className="text-4xl md:text-5xl font-black gradient-text mb-4">
               Why Choose Us?
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-              {benefits.map((benefit, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ scale: 1.1 }}
-                  className="text-center space-y-3"
-                >
-                  <div className="text-5xl">{benefit.icon}</div>
-                  <p className="text-sm font-semibold text-foreground leading-tight">
-                    {benefit.text}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+            <p className="text-muted-foreground text-lg">
+              We deliver excellence in every aspect of our service
+            </p>
           </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {benefits.map((benefit, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="relative group"
+              >
+                <div className="glow-star-effect absolute -top-3 -left-3 w-8 h-8 text-accent opacity-75">
+                  ✦
+                </div>
+                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all">
+                  <p className="text-lg font-bold text-foreground leading-relaxed">
+                    {benefit}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -330,15 +370,15 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <a href="mailto:hello@clicindia.in">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-accent/50 text-foreground px-8"
-              >
-                <Zap className="w-4 h-4 mr-2" />
-                Get Started Today
-              </Button>
-            </a>
+            <Button
+              size="lg"
+              onClick={scrollToServices}
+              className="bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-accent/50 text-foreground px-8"
+              data-testid="button-get-started"
+            >
+              <Zap className="w-4 h-4 mr-2" />
+              Get Started Today
+            </Button>
           </motion.div>
 
           {/* Copyright */}
