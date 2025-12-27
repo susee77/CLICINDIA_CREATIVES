@@ -292,7 +292,7 @@ export default function Home() {
               whileHover={{ y: -8 }}
               className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-2">1️⃣ Basic Logo</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Basic Logo</h3>
               <p className="text-2xl font-bold text-accent mb-6">₹2,499</p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>✓ Simple & clean logo</li>
@@ -312,7 +312,7 @@ export default function Home() {
               whileHover={{ y: -8 }}
               className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-2">2️⃣ Standard Logo</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Standard Logo</h3>
               <p className="text-2xl font-bold text-accent mb-6">₹4,999</p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>✓ Professional logo design</li>
@@ -332,7 +332,7 @@ export default function Home() {
               whileHover={{ y: -8 }}
               className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-2">3️⃣ Premium Logo</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Premium Logo</h3>
               <p className="text-2xl font-bold text-accent mb-6">₹9,999+</p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>✓ High-quality professional logo</li>
@@ -353,7 +353,7 @@ export default function Home() {
               whileHover={{ y: -8 }}
               className="bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10 border border-primary/20 rounded-2xl p-8 hover:border-accent/50 hover:from-primary/20 hover:via-accent/15 hover:to-secondary/20 transition-all glow-effect"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-2">4️⃣ Brand Pro Logo</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-2">Brand Pro Logo</h3>
               <p className="text-2xl font-bold text-accent mb-6">₹21,999+</p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>✓ Premium brand-level logo</li>
