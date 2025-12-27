@@ -91,7 +91,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Animated gradient background with wave effect */
+/* Animated gradient background */
 @keyframes gradient-shift {
   0%, 100% {
     background-position: 0% 50%;
@@ -101,27 +101,39 @@ html {
   }
 }
 
-@keyframes wave-motion {
-  0%, 100% {
-    background-position: 0% 0%, 0% 100%;
+.animated-gradient-bg {
+  background: linear-gradient(
+    -45deg,
+    rgba(148, 51, 234, 0.1),
+    rgba(168, 85, 247, 0.05),
+    rgba(139, 92, 246, 0.1),
+    rgba(99, 102, 241, 0.05)
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Floating logo animation - random movement */
+@keyframes float-random {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(100px, -80px) rotate(10deg);
   }
   50% {
-    background-position: 100% 0%, 100% 100%;
+    transform: translate(-120px, 100px) rotate(-15deg);
+  }
+  75% {
+    transform: translate(80px, 60px) rotate(8deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
-.animated-gradient-bg {
-  background: 
-    linear-gradient(90deg, transparent 0%, rgba(255, 100, 100, 0.15) 25%, rgba(255, 100, 100, 0.2) 50%, rgba(255, 100, 100, 0.15) 75%, transparent 100%),
-    linear-gradient(
-      -45deg,
-      rgba(148, 51, 234, 0.1),
-      rgba(168, 85, 247, 0.05),
-      rgba(139, 92, 246, 0.1),
-      rgba(99, 102, 241, 0.05)
-    );
-  background-size: 400% 400%, 400% 400%;
-  animation: wave-motion 6s ease-in-out infinite, gradient-shift 15s ease infinite;
+.floating-logo {
+  animation: float-random 8s ease-in-out infinite;
 }
 
 /* Floating animation */

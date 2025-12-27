@@ -116,6 +116,18 @@ export default function Home() {
       {/* Animated background */}
       <div className="fixed inset-0 animated-gradient-bg pointer-events-none" />
 
+      {/* Floating CI Logo */}
+      <motion.div
+        className="fixed top-20 left-20 z-10 floating-logo"
+        initial={{ opacity: 0.7 }}
+      >
+        <img 
+          src="/logo.jpg"
+          alt="CI Logo"
+          className="w-24 h-24 rounded-full shadow-lg opacity-70 hover:opacity-100 transition-opacity"
+        />
+      </motion.div>
+
       {/* Scroll Navigation Arrows - Top Right */}
       <motion.button
         onClick={scrollToTop}
